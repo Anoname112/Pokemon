@@ -13,12 +13,12 @@ window.onload = function () {
 function searchChanged () {
 	var val = getElement('search').value;
 	
-	valArray = val.split(' ');
+	valSplit = val.split(' ');
 	
 	var resKeys = [];
 	for (const key in pokedex) {
 		var include = true;
-		for (var i = 0; i < valArray.length; i++) if (!key.toLowerCase().includes(valArray[i].toLowerCase())) include = false;
+		for (var i = 0; i < valSplit.length; i++) if (!key.toLowerCase().includes(valSplit[i].toLowerCase())) include = false;
 		if (include) resKeys.push(key);
 	}
 	
@@ -31,11 +31,20 @@ function searchChanged () {
 			if (imageCleanNames[j].includes(key)) imgName = imageNames[j];
 		}
 		
+		// Type
+		var typeString = '';
+		for (var j = 0; j < pokedex[key].types.length; j++) {
+			typeString += '<span class="type ' + pokedex[key].types[j] + '">' + pokedex[key].types[j] + '</span>';
+		}
+		
+		// Abilities
+		
 		string += `<div class="pokemon">
 			<div>
 				<img class="clipPortrait" src="sprites/` + imgName + `.png">
 			</div>
 			<div class="name">` + pokedex[key].name + `</div>
+			<div>` + typeString + `</div>
 			<div>
 				<table class="stats">
 					<tr>
