@@ -1,0 +1,102 @@
+$statsPadding: 2px;
+$statsBorder: 1px solid #AAAAAA;
+$statsMinWidth: 28px;
+
+* {
+	font-size: 13px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #888888;
+	font-family: "Roboto", "Segoe UI", "Trebuchet MS", "Tahoma", "Arial", "Helvetica", "Consolas";
+}
+
+input[type=text] {
+	width: 200px;
+	height: 20px;
+	padding-left: 5px;
+	font-size: 15px;
+}
+
+#searchDiv {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 15px;
+	background-color: #666666;
+}
+
+#resultDiv {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	padding: 10px 0;
+}
+
+.clipPortrait {
+	clip-path: inset(0% round 5%);
+	background-color: #FFFFFF;
+}
+
+.name {
+	font-weight: bold;
+}
+
+.pokemon {
+	margin: 5px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 5px;
+	background-color: #DDDDDD;
+}
+
+.stats {
+	border-collapse: collapse;
+}
+
+.stats th {
+	padding: $statsPadding;
+	border: $statsBorder;
+	min-width: $statsMinWidth;
+	background-color: #CCCCCC;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.stats td {
+	position: relative;
+	padding: $statsPadding;
+	border: $statsBorder;
+	min-width: $statsMinWidth;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.bar {
+	width: 180px;
+	background-color: #AAAAAA !important;
+}
+
+.bar div {
+	background-color: #48F0FF;
+	height: 10px;
+}
+
+.bold {
+	font-weight: bold !important;
+}
+
+.left {
+	text-align: left !important;
+}
+
+.center {
+	text-align: center !important;
+}
+
+.right {
+	text-align: right !important;
+}
