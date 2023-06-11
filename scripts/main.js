@@ -21,7 +21,7 @@ function searchChanged () {
 	
 	// Find match Pokemons
 	var resKeys = [];
-	for (const key in pokedex) {		
+	for (const key in pokedex) {
 		var include = true;
 		for (var i = 0; i < valSplit.length; i++) if (!key.toLowerCase().includes(valSplit[i].toLowerCase())) include = false;
 		if (include) resKeys.push(key);
