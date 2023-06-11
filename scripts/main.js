@@ -4,8 +4,8 @@ const imageCleanNames = imageNames.map((x) => x.replace('-', ''));
 
 window.onload = function () {
 	//window.oncontextmenu = onContextMenu;
-	window.onmousemove = onMouseMove;
-	window.onclick = onMouseClick;
+	//window.onmousemove = onMouseMove;
+	//window.onclick = onMouseClick;
 	
 	getElement('search').focus();
 }
