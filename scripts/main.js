@@ -11,12 +11,17 @@ window.onload = function () {
 }
 
 function searchChanged () {
-	var val = getElement('search').value;
+	var val = getElement('search').value.trim().replace(/ +(?= )/g,'').replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+	if (val.length < 1) {
+		getElement('resultDiv').innerHTML = '';
+		return;
+	}
+	
 	var valSplit = val.split(' ');
 	
 	// Find match Pokemons
 	var resKeys = [];
-	for (const key in pokedex) {
+	for (const key in pokedex) {		
 		var include = true;
 		for (var i = 0; i < valSplit.length; i++) if (!key.toLowerCase().includes(valSplit[i].toLowerCase())) include = false;
 		if (include) resKeys.push(key);
