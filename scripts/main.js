@@ -11,6 +11,7 @@ window.onload = function () {
 }
 
 function searchChanged () {
+	// Trim, remove multi space, remove symbols
 	var val = getElement('search').value.trim().replace(/ +(?= )/g,'').replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
 	if (val.length < 1) {
 		getElement('resultDiv').innerHTML = '';
@@ -19,84 +20,85 @@ function searchChanged () {
 	
 	var valSplit = val.split(' ');
 	
-	// Find match Pokemons
-	var resKeys = [];
-	for (const key in pokedex) {
+	// Find match Pokemon
+	var resDexKeys = [];
+	for (const dexKey in pokedex) {
 		var include = true;
-		for (var i = 0; i < valSplit.length; i++) if (!key.toLowerCase().includes(valSplit[i].toLowerCase())) include = false;
-		if (include) resKeys.push(key);
+		for (var i = 0; i < valSplit.length; i++) if (!dexKey.toLowerCase().includes(valSplit[i].toLowerCase())) include = false;
+		if (include) resDexKeys.push(dexKey);
 	}
 	
-	// Construct search result content
-	var string = '';
-	for (var i = 0; i < resKeys.length && i < 150; i++) {
-		const key = resKeys[i];
+	// Generate search result content
+	var result = '';
+	// Result from Pokedex
+	for (var i = 0; i < resDexKeys.length && i < 150; i++) {
+		const dexKey = resDexKeys[i];
 		// Find image
 		var imgName = '0';
 		for (var j = 0; j < imageCleanNames.length; j++) {
-			if (imageCleanNames[j] == key) {
+			if (imageCleanNames[j] == dexKey) {
 				imgName = imageNames[j];
 				break;
 			}
-			if (imageCleanNames[j].includes(key)) imgName = imageNames[j];
+			if (imageCleanNames[j].includes(dexKey)) imgName = imageNames[j];
 		}
 		
 		// Type
 		var typeString = '';
-		for (var j = 0; j < pokedex[key].types.length; j++) {
-			typeString += '<span class="type ' + pokedex[key].types[j] + '">' + pokedex[key].types[j] + '</span>';
+		for (var j = 0; j < pokedex[dexKey].types.length; j++) {
+			typeString += '<span class="type ' + pokedex[dexKey].types[j] + '">' + pokedex[dexKey].types[j] + '</span>';
 		}
 		
 		// Abilities
 		var abilitiesString = '';
-		for (const abiKey in pokedex[key].abilities) {
-			abilitiesString += '<span class="ability">' + pokedex[key].abilities[abiKey] + '</span>';
+		for (const abiKey in pokedex[dexKey].abilities) {
+			abilitiesString += '<span class="ability">' + pokedex[dexKey].abilities[abiKey] + '</span>';
 		}
 		
-		string += `<div class="pokemon">
+		result += `<div class="pokemon">
 			<div>
 				<img class="clipPortrait" src="sprites/` + imgName + `.png">
 			</div>
-			<div class="name">` + pokedex[key].name + `</div>
+			<div class="name">` + pokedex[dexKey].name + `</div>
 			<div>` + typeString + `</div>
 			<div>` + abilitiesString + `</div>
 			<div>
 				<table class="stats">
 					<tr>
 						<th>HP</th>
-						<td>` + pokedex[key].baseStats.hp + `</td>
-						<td class="bar"><div style="width: ` + barWidth(pokedex[key].baseStats.hp) + `px;"></div></td>
+						<td>` + pokedex[dexKey].baseStats.hp + `</td>
+						<td class="bar"><div style="width: ` + barWidth(pokedex[dexKey].baseStats.hp) + `px;"></div></td>
 					</tr>
 					<tr>
 						<th>ATK</th>
-						<td>` + pokedex[key].baseStats.atk + `</td>
-						<td class="bar"><div style="width: ` + barWidth(pokedex[key].baseStats.atk) + `px;"></div></td>
+						<td>` + pokedex[dexKey].baseStats.atk + `</td>
+						<td class="bar"><div style="width: ` + barWidth(pokedex[dexKey].baseStats.atk) + `px;"></div></td>
 					</tr>
 						<th>DEF</th>
-						<td>` + pokedex[key].baseStats.def + `</td>
-						<td class="bar"><div style="width: ` + barWidth(pokedex[key].baseStats.def) + `px;"></div></td>
+						<td>` + pokedex[dexKey].baseStats.def + `</td>
+						<td class="bar"><div style="width: ` + barWidth(pokedex[dexKey].baseStats.def) + `px;"></div></td>
 					</tr>
 					<tr>
 						<th>SPA</th>
-						<td>` + pokedex[key].baseStats.spa + `</td>
-						<td class="bar"><div style="width: ` + barWidth(pokedex[key].baseStats.spa) + `px;"></div></td>
+						<td>` + pokedex[dexKey].baseStats.spa + `</td>
+						<td class="bar"><div style="width: ` + barWidth(pokedex[dexKey].baseStats.spa) + `px;"></div></td>
 					</tr>
 					<tr>
 						<th>SPD</th>
-						<td>` + pokedex[key].baseStats.spd + `</td>
-						<td class="bar"><div style="width: ` + barWidth(pokedex[key].baseStats.spd) + `px;"></div></td>
+						<td>` + pokedex[dexKey].baseStats.spd + `</td>
+						<td class="bar"><div style="width: ` + barWidth(pokedex[dexKey].baseStats.spd) + `px;"></div></td>
 					</tr>
 					<tr>
 						<th>SPE</th>
-						<td>` + pokedex[key].baseStats.spe + `</td>
-						<td class="bar"><div style="width: ` + barWidth(pokedex[key].baseStats.spe) + `px;"></div></td>
+						<td>` + pokedex[dexKey].baseStats.spe + `</td>
+						<td class="bar"><div style="width: ` + barWidth(pokedex[dexKey].baseStats.spe) + `px;"></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>`;
 	}
 	
-	getElement('resultDiv').innerHTML = string;
+	getElement('resultDiv').innerHTML = result;
 }
 
 function barWidth (stat) {
