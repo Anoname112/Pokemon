@@ -28,6 +28,10 @@ function searchChanged () {
 		// Find image
 		var imgName = '0';
 		for (var j = 0; j < imageCleanNames.length; j++) {
+			if (imageCleanNames[j] == key) {
+				imgName = imageNames[j];
+				break;
+			}
 			if (imageCleanNames[j].includes(key)) imgName = imageNames[j];
 		}
 		
