@@ -12,9 +12,9 @@ window.onload = function () {
 
 function searchChanged () {
 	var val = getElement('search').value;
+	var valSplit = val.split(' ');
 	
-	valSplit = val.split(' ');
-	
+	// Find match Pokemons
 	var resKeys = [];
 	for (const key in pokedex) {
 		var include = true;
@@ -22,8 +22,9 @@ function searchChanged () {
 		if (include) resKeys.push(key);
 	}
 	
+	// Construct search result content
 	var string = '';
-	for (var i = 0; i < resKeys.length && i < 100; i++) {
+	for (var i = 0; i < resKeys.length; i++) {
 		const key = resKeys[i];
 		// Find image
 		var imgName = '0';
@@ -42,6 +43,10 @@ function searchChanged () {
 		}
 		
 		// Abilities
+		var abilitiesString = '';
+		for (const abiKey in pokedex[key].abilities) {
+			abilitiesString += '<span class="ability">' + pokedex[key].abilities[abiKey] + '</span>';
+		}
 		
 		string += `<div class="pokemon">
 			<div>
@@ -49,6 +54,7 @@ function searchChanged () {
 			</div>
 			<div class="name">` + pokedex[key].name + `</div>
 			<div>` + typeString + `</div>
+			<div>` + abilitiesString + `</div>
 			<div>
 				<table class="stats">
 					<tr>
@@ -89,7 +95,7 @@ function searchChanged () {
 }
 
 function barWidth (stat) {
-	return stat / 255 * 180;
+	return stat / 255 * 225;
 }
 
 function getElement (id) {

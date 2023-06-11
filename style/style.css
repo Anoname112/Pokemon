@@ -73,13 +73,20 @@ input[type=text] {
 }
 
 .bar {
-  width: 180px;
+  width: 225px;
   background-color: #AAAAAA !important;
 }
 
 .bar div {
   background-color: #48F0FF;
   height: 10px;
+}
+
+.ability {
+  margin: 2px;
+  padding: 1px 3px;
+  border-radius: 3px;
+  background-color: #F8F8F8;
 }
 
 .type {
