@@ -29,7 +29,7 @@ function searchChanged () {
 	
 	// Construct search result content
 	var string = '';
-	for (var i = 0; i < resKeys.length; i++) {
+	for (var i = 0; i < resKeys.length && i < 150; i++) {
 		const key = resKeys[i];
 		// Find image
 		var imgName = '0';
